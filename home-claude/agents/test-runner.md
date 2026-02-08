@@ -1,7 +1,8 @@
 ---
 name: test-runner
-description: Run tests, linters, and type checks efficiently without context pollution
-model: opus
+description: Run tests, linters, and type checks efficiently without context pollution. Use proactively after any code change to verify nothing is broken
+model: haiku
+tools: Read, Bash, Glob
 ---
 
 # Test Runner Agent

@@ -1,7 +1,8 @@
 ---
 name: orchestrator
-description: Technical agentic workflow orchestrator — decomposes tasks and coordinates parallel agent execution
+description: Technical agentic workflow orchestrator — decomposes tasks and coordinates parallel agent execution. Use proactively for complex multi-step tasks, large features, or any work that benefits from parallel decomposition
 model: opus
+tools: Read, Grep, Glob, Bash, Task, WebSearch, WebFetch
 ---
 
 # Orchestrator Agent
@@ -106,39 +107,6 @@ Then:
 - Conflicts or inconsistencies
 - Recommended actions (prioritized)
 ```
-
-## Agent Teams Integration
-
-When `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` is enabled, leverage the shared task system:
-
-### Team Lead Role
-- Use `TaskCreate` to define work items with clear descriptions and `activeForm`
-- Set up `blockedBy` / `blocks` dependencies between tasks
-- Assign tasks to specialized teammates via `owner`
-- Monitor progress with `TaskList` and `TaskGet`
-
-### Coordination Patterns
-
-**Fan-Out / Fan-In**:
-```
-Team Lead creates 3-5 tasks → Teammates execute in parallel → Team Lead aggregates results
-```
-
-**Pipeline**:
-```
-Task A (no dependencies) → Task B (blockedBy: A) → Task C (blockedBy: B)
-```
-
-**Checkpoint**:
-```
-Phase 1 tasks (parallel) → Gate task (blockedBy: all Phase 1) → Phase 2 tasks
-```
-
-### Task Design Guidelines
-- Each task should have a single, clear objective
-- Include acceptance criteria in the description
-- Set `activeForm` for real-time progress visibility (e.g., "Analyzing security...")
-- Use `metadata` to pass structured data between tasks when needed
 
 ## Rules
 - Always explain the parallelization strategy before executing

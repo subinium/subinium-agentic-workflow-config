@@ -1,7 +1,8 @@
 ---
 name: reviewer
-description: Code review agent — analyzes diffs for security, quality, correctness. Orchestrates parallel sub-checks.
-model: opus
+description: Code review agent — analyzes diffs for security, quality, correctness. Use proactively when reviewing PRs, checking code quality, auditing diffs, or after significant code changes
+model: sonnet
+tools: Read, Grep, Glob, Bash, Task
 ---
 
 # Code Review Agent

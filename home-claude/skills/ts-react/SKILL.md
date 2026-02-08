@@ -34,7 +34,6 @@ type ButtonProps = {
 
 ## React Patterns
 
-- Functional components only (no class components)
 - Arrow function style: `const Component = () => {}`
 - Default export only for page/route components
 - Named exports for everything else
@@ -150,16 +149,7 @@ const [user, posts, comments] = await Promise.all([
 - Defer non-critical data: fetch eagerly, `await` late
 
 ### CRITICAL — Bundle Size
-```typescript
-// BAD: Barrel imports pull entire library
-import { Button } from 'lucide-react';
-import { debounce } from 'lodash';
-
-// GOOD: Direct imports
-import { Button } from 'lucide-react/dist/esm/icons/button';
-import debounce from 'lodash/debounce';
-```
-- Avoid barrel imports for: `lucide-react`, `lodash`, `date-fns`, `@mui/*`
+- Prefer direct imports over barrel imports for large libraries
 - Use `next/dynamic` for heavy components (charts, editors, maps)
 - Defer third-party scripts: `<Script strategy="lazyOnload" />`
 - Check bundle with `@next/bundle-analyzer`

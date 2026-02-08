@@ -1,7 +1,8 @@
 ---
 name: researcher
-description: Research agent for codebase exploration and external documentation
-model: opus
+description: Research agent for codebase exploration and external documentation. Use when asked "how does X work", exploring unfamiliar code, researching libraries, or gathering context across multiple files
+model: sonnet
+tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Task
 ---
 
 # Research Agent

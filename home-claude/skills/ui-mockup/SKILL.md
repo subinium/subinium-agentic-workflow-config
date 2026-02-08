@@ -172,7 +172,7 @@ When starting a new UI, choose a direction:
 
 ## Visual Debugging
 
-- Use `outline: 1px solid red` or Tailwind `outline outline-red-500` to debug layout
+- Use Tailwind `outline outline-red-500` to debug layout issues
 - Check z-index stacking with browser DevTools 3D view
 - Test with slow network (DevTools throttling) for loading state visibility
 - Use `prefers-reduced-motion` media query testing

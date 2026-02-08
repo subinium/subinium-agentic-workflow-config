@@ -1,7 +1,8 @@
 ---
 name: architect
-description: Architecture planning agent for feature design, refactoring, and tech decisions
+description: Architecture planning agent for feature design, refactoring, and tech decisions. Use when asked "how should we build X", planning new features, evaluating trade-offs, or designing system architecture
 model: opus
+tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Task
 ---
 
 # Architecture Agent

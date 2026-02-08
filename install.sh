@@ -93,9 +93,6 @@ cp "$SCRIPT_DIR/home-claude/agents/orchestrator.md" "$CLAUDE_DIR/agents/"
 echo "  agents/orchestrator.md"
 
 # Rules
-cp "$SCRIPT_DIR/home-claude/rules/commit-conventions.md" "$CLAUDE_DIR/rules/"
-echo "  rules/commit-conventions.md"
-
 cp "$SCRIPT_DIR/home-claude/rules/review-standards.md" "$CLAUDE_DIR/rules/"
 echo "  rules/review-standards.md"
 
@@ -112,12 +109,6 @@ echo "  hooks/block-destructive-git.sh"
 
 cp "$SCRIPT_DIR/hooks/format-on-save.sh" "$CLAUDE_DIR/hooks/"
 echo "  hooks/format-on-save.sh"
-
-cp "$SCRIPT_DIR/hooks/guard-sensitive-files.sh" "$CLAUDE_DIR/hooks/"
-echo "  hooks/guard-sensitive-files.sh"
-
-cp "$SCRIPT_DIR/hooks/track-edited-files.sh" "$CLAUDE_DIR/hooks/"
-echo "  hooks/track-edited-files.sh"
 
 cp "$SCRIPT_DIR/hooks/backup-before-compact.sh" "$CLAUDE_DIR/hooks/"
 echo "  hooks/backup-before-compact.sh"
@@ -167,10 +158,7 @@ FILES_TO_CHECK=(
     "$CLAUDE_DIR/agents/orchestrator.md"
     "$CLAUDE_DIR/hooks/block-destructive-git.sh"
     "$CLAUDE_DIR/hooks/format-on-save.sh"
-    "$CLAUDE_DIR/hooks/guard-sensitive-files.sh"
-    "$CLAUDE_DIR/hooks/track-edited-files.sh"
     "$CLAUDE_DIR/hooks/backup-before-compact.sh"
-    "$CLAUDE_DIR/rules/commit-conventions.md"
     "$CLAUDE_DIR/rules/review-standards.md"
     "$CLAUDE_DIR/rules/error-handling.md"
     "$CLAUDE_DIR/keybindings.json"

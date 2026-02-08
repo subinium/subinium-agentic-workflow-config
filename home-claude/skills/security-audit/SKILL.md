@@ -96,36 +96,3 @@ grep -rn 'dangerouslySetInnerHTML' --include='*.tsx' --include='*.jsx' .
 grep -rn 'innerHTML' --include='*.ts' --include='*.js' .
 ```
 
-## Output Format
-
-```
-## Security Audit Report
-
-### Scope
-- Files reviewed: N
-- Automated checks: npm audit, ruff S rules, git history scan
-
-### Critical Findings
-🔴 [file:line] Description
-   Risk: What could happen
-   Fix: How to fix it
-   CWE: CWE-XXX
-
-### High Findings
-🟠 [file:line] Description
-   Risk: ...
-   Fix: ...
-
-### Medium Findings
-🟡 [file:line] Description
-   Fix: ...
-
-### Passed Checks
-✅ No hardcoded secrets found
-✅ Dependencies up to date
-✅ ...
-
-### Recommendations
-1. Priority action items
-2. ...
-```

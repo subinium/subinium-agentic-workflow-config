@@ -83,16 +83,6 @@
             "timeout": 5
           }
         ]
-      },
-      {
-        "matcher": "Read|Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/guard-sensitive-files.sh",
-            "timeout": 5
-          }
-        ]
       }
     ],
     "PostToolUse": [
@@ -103,11 +93,6 @@
             "type": "command",
             "command": "~/.claude/hooks/format-on-save.sh",
             "timeout": 30
-          },
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/track-edited-files.sh",
-            "timeout": 5
           }
         ]
       }
