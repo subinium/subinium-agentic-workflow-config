@@ -1,0 +1,19 @@
+{
+  "bindings": [
+    {
+      "key": "ctrl+shift+r",
+      "command": "review",
+      "description": "Quick code review"
+    },
+    {
+      "key": "ctrl+shift+t",
+      "command": "tdd",
+      "description": "Start TDD cycle"
+    },
+    {
+      "key": "ctrl+shift+d",
+      "command": "systematic-debugging",
+      "description": "Start debugging workflow"
+    }
+  ]
+}
