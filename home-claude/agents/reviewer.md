@@ -1,7 +1,7 @@
 ---
 name: reviewer
 description: Code review agent — analyzes diffs for security, quality, correctness. Use proactively when reviewing PRs, checking code quality, auditing diffs, or after significant code changes
-model: sonnet
+model: opus
 tools: Read, Grep, Glob, Bash, Task
 ---
 

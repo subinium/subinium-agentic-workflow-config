@@ -88,7 +88,7 @@ Claude Code 기본 상태는 아무 의견이 없습니다. `git push`마다 허
 
 ### 에이전트 — 특화 워커
 
-`~/.claude/agents/`의 마크다운 파일들. frontmatter로 모델, 도구, 역할을 지정합니다. 3단계 모델 전략: opus(핵심 결정), sonnet(분석), haiku(빠른 작업).
+`~/.claude/agents/`의 마크다운 파일들. frontmatter로 모델, 도구, 역할을 지정합니다. 전부 Opus.
 
 | 에이전트 | 언제 스폰되는가 |
 |---------|----------------|

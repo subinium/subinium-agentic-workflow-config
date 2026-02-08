@@ -28,7 +28,7 @@
 - **Main conversation**: Sequential, single-file tasks or quick edits.
 - Size tasks so each agent gets one clear deliverable (~5–6 tasks per teammate). Avoid file conflicts — each agent should own different files.
 - Dispatch 3–5 parallel agents over 1 monolithic agent.
-- **Model tiering**: opus for architecture/security decisions, sonnet for code review/research, haiku for fast operational tasks (test runs, exploration).
+- **Model tiering**: All custom agents default to opus. Override per-agent with `model: sonnet` or `model: haiku` in frontmatter when cost/speed matters.
 
 ## Code Style
 

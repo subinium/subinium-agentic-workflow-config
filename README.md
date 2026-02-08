@@ -88,7 +88,7 @@ Skills are `SKILL.md` files in `~/.claude/skills/`. They inject structured promp
 
 ### Agents — Specialized Workers
 
-Agents are markdown files in `~/.claude/agents/` with frontmatter specifying model, tools, and capabilities. Three-tier model strategy: opus for critical decisions, sonnet for analysis, haiku for fast operations.
+Agents are markdown files in `~/.claude/agents/` with frontmatter specifying model, tools, and capabilities. All use Opus for maximum reasoning.
 
 | Agent | When Claude Spawns It |
 |-------|-----------------------|
