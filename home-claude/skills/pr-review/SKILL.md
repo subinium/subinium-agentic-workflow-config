@@ -82,6 +82,12 @@ Spawn 3 agents simultaneously:
 **Action items**: numbered list for the PR author.
 ```
 
+## Constraints
+
+- DO NOT modify, fix, or edit any code during the review process
+- DO NOT push commits or amend the PR branch
+- Only report findings and post review comments — never apply fixes directly
+
 ### Step 4 (optional, if requested):
 Post review comments directly to GitHub:
 ```bash

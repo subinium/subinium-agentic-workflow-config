@@ -87,6 +87,7 @@ Claude Code 기본 상태는 아무 의견이 없습니다. `git push`마다 허
 | **`tdd`** | `/tdd` | RED/GREEN/REFACTOR 사이클. 실패하는 테스트 먼저 작성 → 통과하는 최소 코드 → 리팩토링. |
 | **`spec`** | `/spec write` | 스펙 기반 개발. Phase 1: 구조화된 인터뷰 → 스펙 작성. Phase 2: 새 세션에서 스펙 기반 구현. 복잡한 기능의 컨텍스트 포화 방지. |
 | **`session-wrap`** | `/session-wrap` | 현재 세션 마무리 — 진행 상황, 대기 중 작업, 수정 파일, 주요 결정 요약. 다음 세션을 위한 핸드오프 노트 생성. |
+| **`context-prime`** | `/context-prime` | 세션 시작 시 프로젝트 컨텍스트 로드 — README, 설정, 구조, 컨벤션 읽기. 세션 시작 시 할루시네이션 위험 감소. |
 
 ### 에이전트 — 특화 워커
 
@@ -96,7 +97,7 @@ Claude Code 기본 상태는 아무 의견이 없습니다. `git push`마다 허
 |---------|----------------|
 | **`orchestrator`** | 복잡한 멀티 스텝 작업. 작업 분해 → 공유 태스크 리스트 생성 → 3-5개 병렬 에이전트 디스패치 → 결과 종합. Agent Teams와 연동하여 실시간 협업. |
 | **`reviewer`** | 코드 리뷰 요청. 보안(인젝션, 인증, 시크릿), 품질(에러 처리, 타입), 정확성(엣지 케이스, 레이스 컨디션) 점검. |
-| **`researcher`** | "X가 어떻게 동작해?" 질문. Glob/Grep/Read로 코드베이스 탐색, 외부 문서 패칭, 발견 사항과 권장사항이 담긴 구조화 리포트 반환. |
+| **`researcher`** | "X가 어떻게 동작해?" 질문. Glob/Grep/Read로 코드베이스 탐색, 외부 문서 패칭. 4가지 추론 패턴(엔티티 확장, 시간순 추적, 개념 심화, 인과 체인) 활용. 구조화 리포트 반환. |
 | **`architect`** | "X를 어떻게 만들어야 해?" 질문. 컴포넌트 아키텍처 설계, 트레이드오프 평가, 데이터 플로우 다이어그램 포함 구현 계획 생성. |
 | **`test-runner`** | 코드 변경 후. lint, typecheck, test를 격리 실행 — 실패만 반환. 테스트 출력이 메인 대화의 컨텍스트 윈도우를 오염시키는 것을 방지. |
 
@@ -109,6 +110,7 @@ Claude Code 라이프사이클 이벤트에 트리거되는 bash 스크립트. �
 | **`session-guard.sh`** | `UserPromptSubmit` | 복잡한 작업 패턴을 감지하고 구현 전 Plan Mode(`Shift+Tab`) 사용을 제안. 프롬프트 키워드 분석. |
 | **`block-destructive-git.sh`** | `PreToolUse` (Bash) | 커맨드를 파싱, 파괴적 패턴(`git push --force`, `git reset --hard`, `git clean -f`, `rm -rf /`)과 비교. Exit code 2로 차단. |
 | **`format-on-save.sh`** | `PostToolUse` (Write/Edit) | Claude가 파일을 쓴 후: `.py`는 `black --quiet`, `.ts/.tsx/.js/.jsx`는 `npx prettier --write` 실행. 포맷터가 설치되어 있을 때만 동작. |
+| **`warn-large-files.sh`** | `PostToolUse` (Write/Edit) | 작성된 파일이 300줄 초과 시 경고, 500줄 이상이면 강한 경고. 작은 모듈로 분리를 권장. 비코드 파일(md, json, css) 스킵. |
 | **`backup-before-compact.sh`** | `PreCompact` | Claude가 대화 컨텍스트를 압축하기 전, JSONL 트랜스크립트를 `~/.claude/backups/`에 복사. 최근 20개 유지. |
 
 ### 규칙 — 자동 로드 가이드라인
@@ -119,6 +121,7 @@ Claude Code 라이프사이클 이벤트에 트리거되는 bash 스크립트. �
 |------|------------|
 | **`review-standards.md`** | 4단계 심각도(Critical/High/Medium/Low), 8개 리뷰 우선순위, 반드시 코멘트가 필요한 9개 패턴(예: `.catch(() => {})`, 하드코딩 URL, 누락된 Error Boundary). |
 | **`error-handling.md`** | TypeScript: `unknown`으로 catch, `instanceof`로 좁히기, 예상 실패에 Result 타입. API 라우트: 일관된 `{ error, message, status }` 형태. |
+| **`confidence-gate.md`** | 구현 전 5포인트 자가 평가: 중복 체크, 패턴 준수, API 정확성, 요구사항 명확성, 근본 원인. 잘못된 방향으로 빌드하는 것을 방지. |
 
 ---
 

@@ -87,6 +87,7 @@ Skills are `SKILL.md` files in `~/.claude/skills/`. They inject structured promp
 | **`tdd`** | `/tdd` | RED/GREEN/REFACTOR cycle. Write failing test first, implement minimum code to pass, then refactor. |
 | **`spec`** | `/spec write` | Spec-driven development. Phase 1: structured interview → write spec. Phase 2: implement from spec in a clean session. Prevents context saturation on complex features. |
 | **`session-wrap`** | `/session-wrap` | Wraps up the current session — summarizes progress, pending tasks, modified files, key decisions. Creates a handoff note for the next session. |
+| **`context-prime`** | `/context-prime` | Primes the session with project context — reads README, config, structure, conventions. Reduces hallucination risk at session start. |
 
 ### Agents — Specialized Workers
 
@@ -96,7 +97,7 @@ Agents are markdown files in `~/.claude/agents/` with frontmatter specifying mod
 |-------|-----------------------|
 | **`orchestrator`** | Complex multi-step tasks. Decomposes work, creates a shared task list, dispatches 3-5 parallel agents, synthesizes results. Integrates with Agent Teams for real-time collaboration. |
 | **`reviewer`** | Code review requests. Checks security (injection, auth, secrets), quality (error handling, types), and correctness (edge cases, race conditions). |
-| **`researcher`** | "How does X work?" questions. Explores codebase with Glob/Grep/Read, fetches external docs, returns structured report with findings and recommendations. |
+| **`researcher`** | "How does X work?" questions. Explores codebase with Glob/Grep/Read, fetches external docs. Uses 4 reasoning patterns (entity expansion, temporal progression, conceptual deepening, causal chains). Returns structured report with findings and recommendations. |
 | **`architect`** | "How should we build X?" questions. Designs component architecture, evaluates trade-offs, produces implementation plans with data flow diagrams. |
 | **`test-runner`** | After any code change. Runs lint, typecheck, and tests in isolation — returns only failures. This prevents test output from polluting the main conversation's context window. |
 
@@ -109,6 +110,7 @@ Hooks are bash scripts triggered by Claude Code lifecycle events. They run autom
 | **`session-guard.sh`** | `UserPromptSubmit` | Detects complex task patterns and suggests Plan Mode (`Shift+Tab`) before implementing. Lightweight keyword analysis on each prompt. |
 | **`block-destructive-git.sh`** | `PreToolUse` (Bash) | Parses the command, checks against destructive patterns (`git push --force`, `git reset --hard`, `git clean -f`, `rm -rf /`). Blocks with exit code 2. |
 | **`format-on-save.sh`** | `PostToolUse` (Write/Edit) | After Claude writes a file: `.py` runs `black --quiet`, `.ts/.tsx/.js/.jsx` runs `npx prettier --write`. Only runs if the formatter is available. |
+| **`warn-large-files.sh`** | `PostToolUse` (Write/Edit) | Warns when a written file exceeds 300 lines, strongly warns at 500+. Encourages splitting into smaller modules. Skips non-code files (md, json, css). |
 | **`backup-before-compact.sh`** | `PreCompact` | Before Claude compresses conversation context, copies the JSONL transcript to `~/.claude/backups/`. Keeps the latest 20. |
 
 ### Rules — Auto-Loaded Guidelines
@@ -119,6 +121,7 @@ Files in `~/.claude/rules/` are always loaded alongside CLAUDE.md. They keep spe
 |------|---------------|
 | **`review-standards.md`** | 4-level severity (Critical/High/Medium/Low), 8 review priorities, 9 patterns that always require a comment (e.g., `.catch(() => {})`, hardcoded URLs, missing error boundaries). |
 | **`error-handling.md`** | TypeScript: catch as `unknown`, narrow with `instanceof`, use Result types for expected failures. API routes: consistent `{ error, message, status }` shape. |
+| **`confidence-gate.md`** | Pre-implementation 5-point self-assessment: duplicate check, pattern compliance, API correctness, scope clarity, root cause. Prevents building the wrong thing. |
 
 ---
 

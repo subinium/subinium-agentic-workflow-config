@@ -82,6 +82,9 @@ echo "  skills/spec/"
 cp -r "$SCRIPT_DIR/home-claude/skills/session-wrap" "$CLAUDE_DIR/skills/"
 echo "  skills/session-wrap/"
 
+cp -r "$SCRIPT_DIR/home-claude/skills/context-prime" "$CLAUDE_DIR/skills/"
+echo "  skills/context-prime/"
+
 # Agents
 cp "$SCRIPT_DIR/home-claude/agents/reviewer.md" "$CLAUDE_DIR/agents/"
 echo "  agents/reviewer.md"
@@ -105,6 +108,9 @@ echo "  rules/review-standards.md"
 cp "$SCRIPT_DIR/home-claude/rules/error-handling.md" "$CLAUDE_DIR/rules/"
 echo "  rules/error-handling.md"
 
+cp "$SCRIPT_DIR/home-claude/rules/confidence-gate.md" "$CLAUDE_DIR/rules/"
+echo "  rules/confidence-gate.md"
+
 # Keybindings
 cp "$SCRIPT_DIR/home-claude/keybindings.json" "$CLAUDE_DIR/keybindings.json"
 echo "  keybindings.json"
@@ -121,6 +127,9 @@ echo "  hooks/backup-before-compact.sh"
 
 cp "$SCRIPT_DIR/hooks/session-guard.sh" "$CLAUDE_DIR/hooks/"
 echo "  hooks/session-guard.sh"
+
+cp "$SCRIPT_DIR/hooks/warn-large-files.sh" "$CLAUDE_DIR/hooks/"
+echo "  hooks/warn-large-files.sh"
 
 # --- Make hooks and scripts executable ---
 echo "[4/7] Setting permissions..."
@@ -173,6 +182,9 @@ FILES_TO_CHECK=(
     "$CLAUDE_DIR/skills/session-wrap/SKILL.md"
     "$CLAUDE_DIR/rules/review-standards.md"
     "$CLAUDE_DIR/rules/error-handling.md"
+    "$CLAUDE_DIR/rules/confidence-gate.md"
+    "$CLAUDE_DIR/skills/context-prime/SKILL.md"
+    "$CLAUDE_DIR/hooks/warn-large-files.sh"
     "$CLAUDE_DIR/keybindings.json"
     "$CLAUDE_DIR/skills/security-audit/scripts/quick-scan.sh"
 )

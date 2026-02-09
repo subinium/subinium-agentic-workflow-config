@@ -105,6 +105,11 @@
             "type": "command",
             "command": "~/.claude/hooks/format-on-save.sh",
             "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/warn-large-files.sh",
+            "timeout": 5
           }
         ]
       }

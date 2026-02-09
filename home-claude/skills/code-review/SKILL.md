@@ -53,6 +53,12 @@ Perform a structured code review. Supports local changes and GitHub PRs.
 - **Overall**: APPROVE / REQUEST CHANGES / NEEDS DISCUSSION
 ```
 
+## Constraints
+
+- DO NOT modify, fix, or edit any code during the review process
+- DO NOT commit any changes
+- Only report findings and suggest fixes — never apply them
+
 ## Checklist
 
 ### Critical

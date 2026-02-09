@@ -10,6 +10,12 @@ disable-model-invocation: true
 
 Run a comprehensive security audit on the current codebase or changes.
 
+## Constraints
+
+- DO NOT modify, fix, or patch any code during the audit
+- DO NOT commit changes or alter git state
+- Only report vulnerabilities and suggest remediations — never apply them
+
 ## Process
 
 1. Run `git diff --staged` (or `git diff`, or `git diff HEAD~1`) to scope the audit
