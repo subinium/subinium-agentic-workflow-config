@@ -79,6 +79,11 @@
 ## Context Management
 - When compacting, preserve: modified file list, test commands, current task state
 - Suggest `/compact` when context exceeds approximately 80% of the window
+- **Recency bias mitigation**: LLMs weight recent messages more than earlier rules. For long sessions:
+  - Use `/clear` and start a new session with a progress summary rather than pushing through a saturated context
+  - Trim verbose logs — show only failing tests or relevant output, not full dumps
+  - Restate key constraints before critical operations (e.g., re-read CLAUDE.md rules before a deploy)
+- **Session handoff**: Before ending a long session, summarize: what was done, what's pending, key decisions made, files modified
 
 ## Security
 - Do not commit .env, credentials, or private keys unless the user explicitly confirms

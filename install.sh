@@ -76,6 +76,12 @@ echo "  skills/deploy/"
 cp -r "$SCRIPT_DIR/home-claude/skills/ci-cd" "$CLAUDE_DIR/skills/"
 echo "  skills/ci-cd/"
 
+cp -r "$SCRIPT_DIR/home-claude/skills/spec" "$CLAUDE_DIR/skills/"
+echo "  skills/spec/"
+
+cp -r "$SCRIPT_DIR/home-claude/skills/session-wrap" "$CLAUDE_DIR/skills/"
+echo "  skills/session-wrap/"
+
 # Agents
 cp "$SCRIPT_DIR/home-claude/agents/reviewer.md" "$CLAUDE_DIR/agents/"
 echo "  agents/reviewer.md"
@@ -112,6 +118,9 @@ echo "  hooks/format-on-save.sh"
 
 cp "$SCRIPT_DIR/hooks/backup-before-compact.sh" "$CLAUDE_DIR/hooks/"
 echo "  hooks/backup-before-compact.sh"
+
+cp "$SCRIPT_DIR/hooks/session-guard.sh" "$CLAUDE_DIR/hooks/"
+echo "  hooks/session-guard.sh"
 
 # --- Make hooks and scripts executable ---
 echo "[4/7] Setting permissions..."
@@ -159,6 +168,9 @@ FILES_TO_CHECK=(
     "$CLAUDE_DIR/hooks/block-destructive-git.sh"
     "$CLAUDE_DIR/hooks/format-on-save.sh"
     "$CLAUDE_DIR/hooks/backup-before-compact.sh"
+    "$CLAUDE_DIR/hooks/session-guard.sh"
+    "$CLAUDE_DIR/skills/spec/SKILL.md"
+    "$CLAUDE_DIR/skills/session-wrap/SKILL.md"
     "$CLAUDE_DIR/rules/review-standards.md"
     "$CLAUDE_DIR/rules/error-handling.md"
     "$CLAUDE_DIR/keybindings.json"

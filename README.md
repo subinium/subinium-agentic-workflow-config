@@ -85,6 +85,8 @@ Skills are `SKILL.md` files in `~/.claude/skills/`. They inject structured promp
 | **`code-review`** | `/code-review` | 3-tier structured review: Critical (security, data loss), Important (types, tests, perf), Suggestions. |
 | **`git-workflow`** | `/git-workflow commit` | Enforces Conventional Commits format. Subcommands: `commit`, `pr`, `branch-cleanup`. |
 | **`tdd`** | `/tdd` | RED/GREEN/REFACTOR cycle. Write failing test first, implement minimum code to pass, then refactor. |
+| **`spec`** | `/spec write` | Spec-driven development. Phase 1: structured interview → write spec. Phase 2: implement from spec in a clean session. Prevents context saturation on complex features. |
+| **`session-wrap`** | `/session-wrap` | Wraps up the current session — summarizes progress, pending tasks, modified files, key decisions. Creates a handoff note for the next session. |
 
 ### Agents — Specialized Workers
 
@@ -104,6 +106,7 @@ Hooks are bash scripts triggered by Claude Code lifecycle events. They run autom
 
 | Hook | Event | What It Does |
 |------|-------|-------------|
+| **`session-guard.sh`** | `UserPromptSubmit` | Detects complex task patterns and suggests Plan Mode (`Shift+Tab`) before implementing. Lightweight keyword analysis on each prompt. |
 | **`block-destructive-git.sh`** | `PreToolUse` (Bash) | Parses the command, checks against destructive patterns (`git push --force`, `git reset --hard`, `git clean -f`, `rm -rf /`). Blocks with exit code 2. |
 | **`format-on-save.sh`** | `PostToolUse` (Write/Edit) | After Claude writes a file: `.py` runs `black --quiet`, `.ts/.tsx/.js/.jsx` runs `npx prettier --write`. Only runs if the formatter is available. |
 | **`backup-before-compact.sh`** | `PreCompact` | Before Claude compresses conversation context, copies the JSONL transcript to `~/.claude/backups/`. Keeps the latest 20. |
