@@ -89,9 +89,6 @@ echo "  skills/context-prime/"
 cp "$SCRIPT_DIR/home-claude/agents/reviewer.md" "$CLAUDE_DIR/agents/"
 echo "  agents/reviewer.md"
 
-cp "$SCRIPT_DIR/home-claude/agents/researcher.md" "$CLAUDE_DIR/agents/"
-echo "  agents/researcher.md"
-
 cp "$SCRIPT_DIR/home-claude/agents/architect.md" "$CLAUDE_DIR/agents/"
 echo "  agents/architect.md"
 
@@ -100,6 +97,18 @@ echo "  agents/test-runner.md"
 
 cp "$SCRIPT_DIR/home-claude/agents/orchestrator.md" "$CLAUDE_DIR/agents/"
 echo "  agents/orchestrator.md"
+
+cp "$SCRIPT_DIR/home-claude/agents/codebase-researcher.md" "$CLAUDE_DIR/agents/"
+echo "  agents/codebase-researcher.md"
+
+cp "$SCRIPT_DIR/home-claude/agents/docs-researcher.md" "$CLAUDE_DIR/agents/"
+echo "  agents/docs-researcher.md"
+
+cp "$SCRIPT_DIR/home-claude/agents/security-researcher.md" "$CLAUDE_DIR/agents/"
+echo "  agents/security-researcher.md"
+
+cp "$SCRIPT_DIR/home-claude/agents/perf-researcher.md" "$CLAUDE_DIR/agents/"
+echo "  agents/perf-researcher.md"
 
 # Rules
 cp "$SCRIPT_DIR/home-claude/rules/review-standards.md" "$CLAUDE_DIR/rules/"
@@ -110,10 +119,6 @@ echo "  rules/error-handling.md"
 
 cp "$SCRIPT_DIR/home-claude/rules/confidence-gate.md" "$CLAUDE_DIR/rules/"
 echo "  rules/confidence-gate.md"
-
-# Keybindings
-cp "$SCRIPT_DIR/home-claude/keybindings.json" "$CLAUDE_DIR/keybindings.json"
-echo "  keybindings.json"
 
 # Hooks
 cp "$SCRIPT_DIR/hooks/block-destructive-git.sh" "$CLAUDE_DIR/hooks/"
@@ -170,10 +175,13 @@ FILES_TO_CHECK=(
     "$CLAUDE_DIR/skills/deploy/SKILL.md"
     "$CLAUDE_DIR/skills/ci-cd/SKILL.md"
     "$CLAUDE_DIR/agents/reviewer.md"
-    "$CLAUDE_DIR/agents/researcher.md"
     "$CLAUDE_DIR/agents/architect.md"
     "$CLAUDE_DIR/agents/test-runner.md"
     "$CLAUDE_DIR/agents/orchestrator.md"
+    "$CLAUDE_DIR/agents/codebase-researcher.md"
+    "$CLAUDE_DIR/agents/docs-researcher.md"
+    "$CLAUDE_DIR/agents/security-researcher.md"
+    "$CLAUDE_DIR/agents/perf-researcher.md"
     "$CLAUDE_DIR/hooks/block-destructive-git.sh"
     "$CLAUDE_DIR/hooks/format-on-save.sh"
     "$CLAUDE_DIR/hooks/backup-before-compact.sh"
@@ -185,7 +193,6 @@ FILES_TO_CHECK=(
     "$CLAUDE_DIR/rules/confidence-gate.md"
     "$CLAUDE_DIR/skills/context-prime/SKILL.md"
     "$CLAUDE_DIR/hooks/warn-large-files.sh"
-    "$CLAUDE_DIR/keybindings.json"
     "$CLAUDE_DIR/skills/security-audit/scripts/quick-scan.sh"
 )
 

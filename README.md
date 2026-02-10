@@ -97,7 +97,10 @@ Agents are markdown files in `~/.claude/agents/` with frontmatter specifying mod
 |-------|-----------------------|
 | **`orchestrator`** | Complex multi-step tasks. Decomposes work, creates a shared task list, dispatches 3-5 parallel agents, synthesizes results. Integrates with Agent Teams for real-time collaboration. |
 | **`reviewer`** | Code review requests. Checks security (injection, auth, secrets), quality (error handling, types), and correctness (edge cases, race conditions). |
-| **`researcher`** | "How does X work?" questions. Explores codebase with Glob/Grep/Read, fetches external docs. Uses 4 reasoning patterns (entity expansion, temporal progression, conceptual deepening, causal chains). Returns structured report with findings and recommendations. |
+| **`codebase-researcher`** | Internal code exploration. Traces code flows, maps dependencies, follows import chains. Uses `git log`/`git blame` for historical context. No web tools — fast, focused local analysis. |
+| **`docs-researcher`** | External documentation research. Version-aware library/API lookups, migration guides, best practices. Checks installed version first, then searches official docs. |
+| **`security-researcher`** | Security audit and vulnerability research. CVE checks, OWASP pattern scanning, secret exposure detection, dependency audit (`npm audit`). Classifies findings by severity. |
+| **`perf-researcher`** | Performance analysis. Identifies N+1 queries, bundle bloat, render bottlenecks, algorithmic inefficiencies. Includes profiling commands and anti-pattern scanning. |
 | **`architect`** | "How should we build X?" questions. Designs component architecture, evaluates trade-offs, produces implementation plans with data flow diagrams. |
 | **`test-runner`** | After any code change. Runs lint, typecheck, and tests in isolation — returns only failures. This prevents test output from polluting the main conversation's context window. |
 
@@ -175,14 +178,6 @@ Edit files in this repo, then `bash install.sh` to redeploy. Existing config is 
 **Add a new hook**: Create `hooks/{name}.sh`, add it to `install.sh` and the `hooks` section of `home-claude/settings.json`.
 
 **Change permissions**: Edit `home-claude/settings.json` — `allow` for auto-approve, `deny` for hard block.
-
-### Keyboard Shortcuts
-
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl+Shift+R` | Quick code review |
-| `Ctrl+Shift+T` | Start TDD cycle |
-| `Ctrl+Shift+D` | Start debugging workflow |
 
 ---
 
