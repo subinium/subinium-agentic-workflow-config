@@ -79,10 +79,15 @@ Save the spec and tell the user:
 
 1. Find the most recent spec file (`SPEC.md`, `docs/spec-*.md`)
 2. Read the spec fully
-3. Create an implementation plan from the spec's Technical Design section
-4. Implement against the Acceptance Criteria — check each off as completed
-5. After implementation, run verification (lint, typecheck, tests)
-6. Report which acceptance criteria pass and which are pending
+3. **Stale check** — verify the spec is still valid:
+   - Run `git log --oneline -20` and check for commits after the spec file's last modification
+   - Scan for changes to files or APIs referenced in the spec
+   - If significant changes overlap with spec scope, warn the user before proceeding
+   - If the spec references files or functions that no longer exist, stop and ask whether to update the spec first
+4. Create an implementation plan from the spec's Technical Design section (use tactical plan format with dependencies and parallel groups)
+5. Implement against the Acceptance Criteria — check each off as completed
+6. After implementation, run verification (lint, typecheck, tests)
+7. Report which acceptance criteria pass and which are pending
 
 ### Rules
 - Do NOT re-interview the user — the spec is the source of truth

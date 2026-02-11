@@ -30,6 +30,31 @@
 - Dispatch 3–5 parallel agents over 1 monolithic agent.
 - **Model tiering**: All custom agents default to opus. Override per-agent with `model: sonnet` or `model: haiku` in frontmatter when cost/speed matters.
 
+## Planning
+
+### EnterPlanMode
+Use `EnterPlanMode` proactively for non-trivial implementation tasks:
+- New features with multiple files or architectural decisions
+- Refactors that affect existing behavior
+- Tasks with multiple valid approaches
+- Any work touching 3+ files
+
+Skip for: single-file fixes, typos, one-line changes, pure research.
+
+Flow: `EnterPlanMode` → explore codebase → write tactical plan → user approves → implement.
+
+### Iterative Planning
+Plans are hypotheses, not contracts. Follow the plan-execute-adjust loop:
+
+1. **Plan** — Create tactical plan with dependencies and parallel groups
+2. **Execute** — Implement the highest-risk or most uncertain step first
+3. **Assess** — Did results match expectations? Any new information?
+4. **Adjust** — Update remaining plan steps based on what was learned
+5. **Repeat** — Continue until all steps complete
+
+When to adjust: unexpected API behavior, discovered constraints, user feedback, failed assumptions.
+When NOT to adjust: minor implementation details, cosmetic differences from plan.
+
 ## Code Style
 
 ### TypeScript / JavaScript

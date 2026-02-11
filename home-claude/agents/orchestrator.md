@@ -108,6 +108,24 @@ Then:
 - Recommended actions (prioritized)
 ```
 
+### Pattern: Plan → TaskList Bridge
+When an architect, `/spec`, or `EnterPlanMode` produces implementation steps:
+
+1. Convert each step → `TaskCreate` (subject, description, activeForm)
+2. Map step dependencies → `TaskUpdate(addBlockedBy: [...])`
+3. Group steps with no dependencies → dispatch as parallel agents
+4. Assign each task to an agent with the appropriate `subagent_type`
+
+Example flow:
+```
+Plan Step 1: Create types (no deps)     → TaskCreate → dispatch immediately
+Plan Step 2: Implement logic (no deps)  → TaskCreate → dispatch immediately (parallel)
+Plan Step 3: Add API route (deps: 1,2)  → TaskCreate + addBlockedBy: [1,2] → wait
+Plan Step 4: Integration test (deps: 3) → TaskCreate + addBlockedBy: [3] → wait
+```
+
+Each task must own different files to avoid conflicts between parallel agents.
+
 ## Rules
 - Always explain the parallelization strategy before executing
 - If an agent fails, do not block others — report the failure and continue

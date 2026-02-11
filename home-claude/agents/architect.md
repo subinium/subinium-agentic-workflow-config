@@ -57,19 +57,25 @@ Step-by-step description of how data moves through the system.
 3. API call → ...
 4. Response → ...
 
+### Risks & Mitigations (Assess First)
+
+| Risk | Impact | Mitigation | Verify In Step |
+|------|--------|------------|----------------|
+| ... | ... | ... | ... |
+
+Address the highest-risk item first. If a risk invalidates the design, stop and reassess before implementing further.
+
 ### Implementation Steps
-Ordered list of concrete steps to implement this design.
 
-1. [ ] Step 1 — estimated scope (S/M/L)
-2. [ ] Step 2
-3. [ ] Step 3
-...
+| # | Step | Files | Depends On | Scope |
+|---|------|-------|------------|-------|
+| 1 | ... | `path/file.ts` | — | S |
+| 2 | ... | `path/other.ts` | — | M |
+| 3 | ... | `path/route.ts` | 1, 2 | S |
 
-### Risks & Mitigations
-
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| ... | ... | ... |
+- Steps with no dependencies form a parallel group — dispatch simultaneously
+- Each step should own specific files to avoid conflicts between agents
+- Verify the highest-risk step before committing to dependent steps
 
 ### Open Questions
 - Questions that need answering before or during implementation
