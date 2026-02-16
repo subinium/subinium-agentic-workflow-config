@@ -55,7 +55,22 @@ Plans are hypotheses, not contracts. Follow the plan-execute-adjust loop:
 When to adjust: unexpected API behavior, discovered constraints, user feedback, failed assumptions.
 When NOT to adjust: minor implementation details, cosmetic differences from plan.
 
+### Bias Toward Implementation
+- **Time-box research**: Spend no more than 20% of session effort on research/planning.
+  If 3+ consecutive tool calls are read-only without producing code, start implementing
+  the most certain part or ask a specific question.
+- **No plan-only sessions**: Every implementation request must produce code changes,
+  unless the user explicitly asks for "just a plan" or "research only".
+- **Prototype over perfect plan**: When uncertain, write a minimal working version first,
+  then iterate.
+
 ## Code Style
+
+### Language Priority
+1. **TypeScript** — default for all new code
+2. **Python** — data scripts, ML, automation, CLI tools
+3. **Rust** — performance-critical or systems work
+4. **Markdown** — documentation, specs, notes
 
 ### TypeScript / JavaScript
 - TypeScript first. New files as `.ts` / `.tsx`
@@ -83,7 +98,11 @@ When NOT to adjust: minor implementation details, cosmetic differences from plan
 - Conventional Commits: feat:, fix:, refactor:, docs:, chore:, test:
 - English, imperative mood, one logical change per commit
 - Do not force push to main/master unless the user explicitly confirms
-- Run `lint` and `tsc --noEmit` before creating a PR. Skip only if the user says to skip.
+- Run `lint` before creating a PR. Skip only if the user says to skip.
+- Run `tsc --noEmit` before creating a PR. Skip only if the user says to skip.
+- **Auto-push**: After every `git commit`, run `git push`.
+- If the remote branch does not exist, use `git push -u origin HEAD`.
+- Skip auto-push only if the user explicitly says "commit only" or "don't push".
 
 ## Debugging
 1. Read the full error message and stack trace before forming a hypothesis
@@ -123,6 +142,9 @@ When instructions conflict, follow this priority:
 4. General best practices
 
 ## Boundaries
+- **Do not add features, files, or refactors the user did not request** — unless the user explicitly
+  asks to "improve", "clean up", or "refactor freely". If you notice something worth improving,
+  mention it but do not implement it.
 - Do not modify files outside the current project directory without confirmation.
 - Do not install global packages without confirmation.
 - Do not delete branches, tags, or releases without confirmation.
@@ -132,3 +154,7 @@ When instructions conflict, follow this priority:
 ## Project Patterns
 - Next.js: App Router, Server Components by default
 - React: Tailwind CSS styling
+- **Apple Silicon (ARM64)**:
+  - `sharp` >= 0.33 required. If install fails: `npm rebuild sharp` or `--platform=darwin --arch=arm64`
+  - Use `python3` (not `python`), prefer `uv` for venv management
+  - Check arch: `node -p process.arch` (should return `arm64`)

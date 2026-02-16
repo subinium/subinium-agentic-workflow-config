@@ -8,7 +8,27 @@ disable-model-invocation: true
 
 # Security Audit
 
-Run a comprehensive security audit on the current codebase or changes.
+Run a security audit on the current codebase or changes.
+
+## Usage
+```
+/security-audit            # Quick mode (default): <60 seconds, changed files only
+/security-audit --full     # Full mode: 5-10 minutes, entire codebase
+```
+
+## Modes
+
+### Quick Mode (default)
+- Scope: changed files only (`git diff`)
+- Checks: Secrets, Injection, Auth (categories 1-3)
+- Time limit: 60 seconds
+- Best for: pre-commit, pre-push reviews
+
+### Full Mode (`--full`)
+- Scope: entire codebase
+- Checks: All 6 categories
+- Time limit: 10 minutes
+- Best for: release preparation, initial audits, compliance
 
 ## Constraints
 
@@ -18,10 +38,18 @@ Run a comprehensive security audit on the current codebase or changes.
 
 ## Process
 
-1. Run `git diff --staged` (or `git diff`, or `git diff HEAD~1`) to scope the audit
-2. Read ALL changed files and their dependencies
-3. Check each category below
-4. Run automated checks where possible
+### Quick Mode
+1. Run `git diff --staged` (or `git diff`, or `git diff HEAD~1`) to scope
+2. Read changed files and their direct imports
+3. Check categories 1-3 (Secrets, Injection, Auth)
+4. Run `quick-scan.sh` on changed files
+5. Output findings
+
+### Full Mode
+1. Identify all source files in the project
+2. Read ALL source files and their dependencies
+3. Check all 6 categories below
+4. Run automated checks
 5. Output structured findings
 
 ## Audit Categories

@@ -53,6 +53,22 @@ Perform a structured code review. Supports local changes and GitHub PRs.
 - **Overall**: APPROVE / REQUEST CHANGES / NEEDS DISCUSSION
 ```
 
+## `/code-review` vs `/pr-review`
+
+| Aspect | `/code-review` | `/pr-review` |
+|--------|---------------|-------------|
+| **Scope** | Local changes (staged/unstaged/last commit) | GitHub PR (remote) |
+| **CI Status** | Runs checks locally | Reads GitHub CI status |
+| **Output** | Inline findings | Inline findings + optional GH review comments |
+| **Best For** | Pre-commit quality check | Reviewing someone else's PR |
+| **Trigger** | "review my code", "check my changes" | "review PR #123", "review this PR" |
+
+## Time Limits
+
+- **Small diff** (<200 lines): Complete within 2 minutes
+- **Medium diff** (200-1000 lines): Complete within 5 minutes
+- **Large diff** (>1000 lines): Warn user about scope, focus on Critical/Important only, skip Suggestions
+
 ## Constraints
 
 - DO NOT modify, fix, or edit any code during the review process

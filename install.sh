@@ -85,6 +85,9 @@ echo "  skills/session-wrap/"
 cp -r "$SCRIPT_DIR/home-claude/skills/context-prime" "$CLAUDE_DIR/skills/"
 echo "  skills/context-prime/"
 
+cp -r "$SCRIPT_DIR/home-claude/skills/ship" "$CLAUDE_DIR/skills/"
+echo "  skills/ship/"
+
 # Agents
 cp "$SCRIPT_DIR/home-claude/agents/reviewer.md" "$CLAUDE_DIR/agents/"
 echo "  agents/reviewer.md"
@@ -110,6 +113,9 @@ echo "  agents/security-researcher.md"
 cp "$SCRIPT_DIR/home-claude/agents/perf-researcher.md" "$CLAUDE_DIR/agents/"
 echo "  agents/perf-researcher.md"
 
+cp "$SCRIPT_DIR/home-claude/agents/researcher.md" "$CLAUDE_DIR/agents/"
+echo "  agents/researcher.md"
+
 # Rules
 cp "$SCRIPT_DIR/home-claude/rules/review-standards.md" "$CLAUDE_DIR/rules/"
 echo "  rules/review-standards.md"
@@ -119,6 +125,15 @@ echo "  rules/error-handling.md"
 
 cp "$SCRIPT_DIR/home-claude/rules/confidence-gate.md" "$CLAUDE_DIR/rules/"
 echo "  rules/confidence-gate.md"
+
+cp "$SCRIPT_DIR/home-claude/rules/approach-first.md" "$CLAUDE_DIR/rules/"
+echo "  rules/approach-first.md"
+
+cp "$SCRIPT_DIR/home-claude/rules/plan-template.md" "$CLAUDE_DIR/rules/"
+echo "  rules/plan-template.md"
+
+cp "$SCRIPT_DIR/home-claude/rules/commit-conventions.md" "$CLAUDE_DIR/rules/"
+echo "  rules/commit-conventions.md"
 
 # Hooks
 cp "$SCRIPT_DIR/hooks/block-destructive-git.sh" "$CLAUDE_DIR/hooks/"
@@ -135,6 +150,9 @@ echo "  hooks/session-guard.sh"
 
 cp "$SCRIPT_DIR/hooks/warn-large-files.sh" "$CLAUDE_DIR/hooks/"
 echo "  hooks/warn-large-files.sh"
+
+cp "$SCRIPT_DIR/hooks/typecheck-on-edit.sh" "$CLAUDE_DIR/hooks/"
+echo "  hooks/typecheck-on-edit.sh"
 
 # --- Make hooks and scripts executable ---
 echo "[4/7] Setting permissions..."
@@ -193,6 +211,12 @@ FILES_TO_CHECK=(
     "$CLAUDE_DIR/rules/confidence-gate.md"
     "$CLAUDE_DIR/skills/context-prime/SKILL.md"
     "$CLAUDE_DIR/hooks/warn-large-files.sh"
+    "$CLAUDE_DIR/hooks/typecheck-on-edit.sh"
+    "$CLAUDE_DIR/skills/ship/SKILL.md"
+    "$CLAUDE_DIR/agents/researcher.md"
+    "$CLAUDE_DIR/rules/approach-first.md"
+    "$CLAUDE_DIR/rules/plan-template.md"
+    "$CLAUDE_DIR/rules/commit-conventions.md"
     "$CLAUDE_DIR/skills/security-audit/scripts/quick-scan.sh"
 )
 

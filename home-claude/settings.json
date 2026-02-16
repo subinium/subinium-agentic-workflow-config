@@ -110,6 +110,11 @@
             "type": "command",
             "command": "~/.claude/hooks/warn-large-files.sh",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/typecheck-on-edit.sh",
+            "timeout": 15
           }
         ]
       }

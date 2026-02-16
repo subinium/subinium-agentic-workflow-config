@@ -16,12 +16,14 @@ Run tests, linters, and type checkers. Return only summary + failures.
    - `pyproject.toml` / `setup.py` / `setup.cfg` → Python project
    - Both → monorepo, run both
 
-2. Run in order:
+2. Run **all three checks in parallel** (separate Bash calls in a single message):
    - **Linter**: eslint/biome (JS/TS) or ruff (Python)
    - **Type check**: `npx tsc --noEmit` (TS) or `mypy` (Python)
    - **Tests**: `npm test` / `npx vitest run` (JS/TS) or `pytest` (Python)
 
-3. Collect results.
+   IMPORTANT: Launch all three as independent parallel Bash calls. Do NOT run them sequentially.
+
+3. Collect results from all three and produce the report.
 
 ## Output Rules
 

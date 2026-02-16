@@ -94,3 +94,24 @@ Save the spec and tell the user:
 - If the spec has Open Questions, ask the user before proceeding
 - If something is out of scope, skip it even if it seems related
 - Commit with `feat:` referencing the spec name
+
+---
+
+## Anti-Pattern Warning
+
+**Do NOT write a spec and implement in the same session.**
+
+Spec writing fills context with interview questions, design alternatives, and research.
+Implementation needs clean context focused on code.
+
+### Correct Workflow
+1. Session 1: `/spec write` → save spec → end session
+2. Session 2: `/spec implement` → implement from spec → ship
+
+### Quality Gate Checklist (before saving spec)
+- [ ] Goal is one sentence, not a paragraph
+- [ ] Scope has explicit "Out of Scope" items
+- [ ] Acceptance criteria are testable (not vague like "works well")
+- [ ] Technical design names specific files/components to create or modify
+- [ ] Edge cases section has at least 3 items
+- [ ] No open questions remain (or they're flagged for Phase 2)

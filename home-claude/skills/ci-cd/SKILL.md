@@ -297,3 +297,18 @@ Read existing workflow files and check:
    - **Build**: check env vars, config
 3. Fix and push, verify with `gh run watch`
 
+### 3-Attempt Limit
+
+Each fix attempt = one `git push` + `gh run watch` cycle.
+
+- **Attempt 1**: Apply the most likely fix based on error analysis
+- **Attempt 2**: If still failing, re-read logs, try alternative fix
+- **Attempt 3**: Last attempt with a different approach
+
+**After 3 failed attempts**: Stop. Report to the user with:
+- All 3 approaches tried and why they failed
+- Error logs from each attempt
+- Suggested next steps (manual investigation, environment issue, upstream dependency)
+
+Do NOT continue past 3 attempts — escalate to the user instead.
+
