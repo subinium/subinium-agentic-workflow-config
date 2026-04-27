@@ -1,6 +1,6 @@
 # Tactical Plan Template
 
-When creating implementation plans (via EnterPlanMode, architect agent, or /spec), structure steps with explicit dependencies to enable parallel execution.
+When creating implementation plans (via EnterPlanMode or the architect agent), structure steps with explicit dependencies to enable parallel execution.
 
 ## Format
 

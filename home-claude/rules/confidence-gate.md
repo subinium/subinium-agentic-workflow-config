@@ -34,3 +34,4 @@ Risk: [main thing that could go wrong]
 - Fixing a symptom instead of tracing the root cause
 - Building something the user didn't actually ask for
 - Diving into implementation without being able to articulate the approach
+- **Confirmation cascade**: 5+ tool calls all supporting one hypothesis without finding any counter-evidence — you're confirming, not investigating. Stop and explicitly search for evidence the hypothesis is wrong
