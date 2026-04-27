@@ -18,11 +18,13 @@
       "Bash(npm run build:*)",
       "Bash(npm run test:*)",
       "Bash(npm run dev:*)",
+      "Bash(npm ci:*)",
       "Bash(npx tsc:*)",
       "Bash(npx tsx:*)",
       "Bash(npx prettier:*)",
       "Bash(npx biome:*)",
       "Bash(npx next:*)",
+      "Bash(npx create-next-app:*)",
       "Bash(python3:*)",
       "Bash(pip install:*)",
       "Bash(pip list:*)",
@@ -36,6 +38,16 @@
       "Bash(wc:*)",
       "Bash(which:*)",
       "Bash(pwd:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(echo:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(sleep:*)",
+      "Bash(kill:*)",
+      "Bash(lsof:*)",
       "Bash(gh api:*)",
       "Bash(gh pr:*)",
       "Bash(gh issue:*)",
@@ -44,12 +56,19 @@
       "Bash(pnpm:*)",
       "Bash(yarn:*)",
       "Bash(bun:*)",
+      "Bash(cargo:*)",
+      "Bash(rustup:*)",
       "Bash(docker ps:*)",
       "Bash(docker logs:*)",
       "Bash(docker build:*)",
       "Bash(docker run:*)",
       "Bash(vercel:*)",
-      "Bash(curl:*)",
+      "Bash(curl https://api.github.com/*)",
+      "Bash(curl https://api.vercel.com/*)",
+      "Bash(curl https://api.anthropic.com/*)",
+      "Bash(curl https://raw.githubusercontent.com/*)",
+      "Bash(curl http://localhost:*)",
+      "Bash(curl http://127.0.0.1:*)",
       "Bash(jq:*)",
       "Bash(npm audit:*)",
       "Bash(pip audit:*)",
@@ -59,20 +78,45 @@
     "deny": [
       "Read(**/.env)",
       "Read(**/.env.*)",
+      "Read(**/.envrc)",
       "Read(**/secrets/**)",
       "Read(**/*credentials*)",
       "Read(**/*.pem)",
       "Read(**/*.key)",
       "Read(**/*id_rsa*)",
       "Read(**/*id_ed25519*)",
+      "Read(**/*id_ecdsa*)",
+      "Read(**/*id_dsa*)",
+      "Read(**/.ssh/**)",
+      "Read(**/.aws/credentials)",
+      "Read(**/.aws/config)",
+      "Read(**/.npmrc)",
+      "Read(**/.netrc)",
+      "Read(**/kubeconfig)",
+      "Read(**/.kube/config)",
       "Read(**/*.sqlite)",
       "Read(**/*.db)",
       "Write(**/.env)",
       "Write(**/.env.*)",
-      "Write(**/secrets/**)"
+      "Write(**/.envrc)",
+      "Write(**/secrets/**)",
+      "Write(**/.ssh/**)",
+      "Write(**/.aws/**)"
     ]
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/session-context.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "matcher": "",
@@ -95,6 +139,16 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "matcher": "Read|Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/guard-sensitive-files.sh",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -110,23 +164,42 @@
             "type": "command",
             "command": "~/.claude/hooks/warn-large-files.sh",
             "timeout": 5
-          },
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/typecheck-on-edit.sh",
-            "timeout": 15
           }
         ]
       }
     ],
     "PreCompact": [
       {
+        "matcher": "auto|manual",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/precompact-handoff.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
         "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/backup-before-compact.sh",
-            "timeout": 10
+            "command": "~/.claude/hooks/precompact-handoff.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "matcher": "rate_limit|authentication_failed|billing_error|server_error",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/log-stop-failure.sh",
+            "timeout": 3
           }
         ]
       }
