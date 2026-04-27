@@ -28,14 +28,20 @@ if [ ! -f "$FILE_PATH" ]; then
     exit 0
 fi
 
+# Skip very large files — formatter cold-start + write can exceed timeout.
+LINE_COUNT=$(wc -l < "$FILE_PATH" 2>/dev/null || echo 0)
+if [ "$LINE_COUNT" -gt 3000 ]; then
+    exit 0
+fi
+
 # Get file extension
 EXT="${FILE_PATH##*.}"
 
 case "$EXT" in
     py)
-        # Format Python with black (if installed)
+        # Format Python with black (if installed). Background — don't block tool return.
         if command -v black &>/dev/null; then
-            black --quiet "$FILE_PATH" 2>/dev/null || true
+            (black --quiet "$FILE_PATH" >/dev/null 2>&1 &)
         fi
         ;;
     ts|tsx|js|jsx|json|css|md)
@@ -72,7 +78,8 @@ sys.exit(0 if 'prettier' in pkg else 1)
 
         if [ "$PRETTIER_CONFIG_FOUND" = true ]; then
             if command -v npx &>/dev/null; then
-                npx prettier --write "$FILE_PATH" 2>/dev/null || true
+                # Background — npx cold-start (~3s) + prettier should not block tool return.
+                (npx prettier --write "$FILE_PATH" >/dev/null 2>&1 &)
             fi
         fi
         ;;
